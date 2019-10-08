@@ -1,0 +1,37 @@
+liquid voting module
+
+example:
+
+alice, bob, and carol are the voters, p1 and p2 are
+direct policies.
+
+|    | alice | bob | carol |
+| a  |  0.0  | 0.2 |  0.3  |
+| b  |  0.5  | 0.0 |  0.1  | 
+| c  |  0.1  | 0.4 |  0.0  |
+| p1 |  0.0  | 0.3 |  0.6  |
+| p2 |  0.4  | 0.1 |  0.0  |
+
+how you read this matrix is like this:
+
+alice voted for bob 0.5 votes, 0.1 for carol, and 0.4 for p2.
+bob voted to alice 0.2, 0.4 votes for carol, and 0.3 for p1 and 0.1 for p2. and
+so on. Note that the total for each voter is 1.0.
+
+we need a json file that looks like this,
+
+[
+[0.0, 0.2, 0.3],
+[0.5, 0.0, 0.1],
+[0.1, 0.4, 0.0],
+[0.0, 0.3, 0.6],
+[0.4, 0.1, 0.0]
+]
+
+this will give a result like this:
+
+[1.9414062500000009, 1.0585937500000002]
+[4.333333333333335, 4.762376237623764, 6.454545454545452]
+
+this means that p1 had approx. 1.9 votes, where p2 had 1.05 and Carol was most
+influential for this poll.

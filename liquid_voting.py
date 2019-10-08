@@ -8,6 +8,7 @@ class LiquidVoting:
 
     ITERATION = 1000
 
+
     def __init__(self, _data):
         self.square = len(data)
         self.num_people = len(data[0])
@@ -24,8 +25,8 @@ class LiquidVoting:
     def calc(self):
         A = np.eye(self.square)
         result = []
-        wj = np.zeros((3, 1))
-        d = np.zeros((3, 1))
+        wj = np.zeros((self.num_people, 1))
+        d = np.zeros((self.num_people, 1))
 
         for i in range(LiquidVoting.ITERATION):
             A = self.V * A
@@ -42,6 +43,7 @@ class LiquidVoting:
 if __name__ == '__main__':
 
     json_file = "test.json"
+    # json_file = "data.json"
 
     with open(json_file, 'r') as f:
         data = json.load(f)
@@ -53,3 +55,6 @@ if __name__ == '__main__':
         print(result)
         print(influence)
         print('elapsed: {}'.format(end-start))
+
+        with open("result.json", 'w') as wf:
+            json.dump([result, influence], wf)
