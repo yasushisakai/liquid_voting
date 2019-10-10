@@ -6,7 +6,7 @@ from timeit import default_timer as timer
 
 class LiquidVoting:
 
-    ITERATION = 1000
+    ITERATION = 10000
 
 
     def __init__(self, _data):
@@ -35,7 +35,13 @@ class LiquidVoting:
                 wj[p] += np.sum(A[p, :self.num_people])
                 d[p] += A[p, p]
 
+            # print(A)
+
         result = [np.sum(A[self.num_people + i, :self.num_people]) for i in range(self.num_plan)]
+
+        print(wj)
+        print(d)
+
         influence = [n[0] for n in wj/d]
        
         return result, influence
@@ -43,7 +49,6 @@ class LiquidVoting:
 if __name__ == '__main__':
 
     json_file = "test.json"
-    # json_file = "data.json"
 
     with open(json_file, 'r') as f:
         data = json.load(f)
